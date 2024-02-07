@@ -1,17 +1,23 @@
-<div id="<%= dom_id course %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= course.title %>
-  </p>
+<%# Dom_id helps with Hotwire stuff - leave it! %>
+<div id="<%= dom_id course %>" class="max-w-sm rounded-b overflow-hidden shadow-lg hover:bg-voodoo-100">
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= course.description %>
-  </p>
+  <%# Make the whole thing a link %>
+  <%= link_to course, class:'flex flex-col h-full' do %>
 
-  <% if action_name != "show" %>
-    <%= link_to "Show this course", course, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Edit this course", edit_course_path(course), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
+    <%# Nice placeholder service via.placeholder %>
+    <%= image_tag("https://via.placeholder.com/300") %>
+
+    <div class="px-6 py-4 flex flex-col justify-between grow">
+      <div>
+        <div class="flex items-center justify-between font-bold text-xl mb-2">
+          <%= course.title %>
+        </div>
+        <p class="text-sm font-extralight">Hans Johan</p>
+        <div>
+          <p class="text-md font-light">Free</p>
+        </div>
+      </div>
+    </div>
+
   <% end %>
 </div>
