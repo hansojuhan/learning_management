@@ -70,3 +70,5 @@ group :test do
 end
 
 gem 'font-awesome-sass', '~> 6.5', '>= 6.5.1'
+
+gem 'devise', '~> 4.9', '>= 4.9.3'
