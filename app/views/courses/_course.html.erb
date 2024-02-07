@@ -4,8 +4,13 @@
   <%# Make the whole thing a link %>
   <%= link_to course, class:'flex flex-col h-full' do %>
 
-    <%# Nice placeholder service via.placeholder %>
-    <%= image_tag("https://via.placeholder.com/300") %>
+    <% if course.image.present? %>
+      <%= image_tag course.image, class:'w-full rounded-t' %>
+    <% else %>
+      <%# Nice placeholder service via.placeholder %>
+      <%= image_tag("https://via.placeholder.com/300") %>
+    <% end %>
+
 
     <div class="px-6 py-4 flex flex-col justify-between grow">
       <div>
