@@ -21,6 +21,11 @@
       <p class="text-gray-500 mt-2"><%= @course.description %></p>
     </div>
 
-    <%= link_to "Back to courses", courses_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%# Sidebar %>
+    <div>
+      <%= render "sidebar" %>
+    </div>
+
+    <%# <%= link_to "Back to courses", courses_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>
