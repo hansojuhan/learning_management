@@ -1,0 +1,29 @@
+<div class="w-full">
+  <%# Loop and display all lessons under a course %>
+  <% course.lessons.order(:position).each do |lesson| %>
+    <%# Check if it's paid %>
+    <% if lesson.paid %>
+      <div class="border p-6 hover:bg-gray-200">
+        <div>
+          <%= icon('fa-solid', 'lock', class:'mr-2 text-gray-600') %>
+          <span class="font-light">
+            <%= lesson.title %>
+          </span>
+        </div>
+      </div>
+
+    <% else %>
+
+      <%= link_to course_lesson_path(course, lesson) do %>
+
+        <%# Put some ruby right inside the class to highlight the current lesson %>
+        <div
+          class="border p-6 hover:bg-gray-200 <%= @lesson.id == lesson.id ? 'bg-amaranth-100' : '' %>">
+          <span class="font-light"><%= lesson.title %></span>
+        </div>
+      <% end %>
+
+    <% end %>
+    <span>
+  <% end %>
+</div>

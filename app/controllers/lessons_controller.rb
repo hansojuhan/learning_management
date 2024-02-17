@@ -19,9 +19,4 @@ class LessonsController < ApplicationController
     def set_lesson
       @lesson = Lesson.find(params[:id])
     end
-
-    # Only allow a list of trusted parameters through.
-    def lesson_params
-      params.require(:lesson).permit(:title, :description, :paid, :course_id)
-    end
 end

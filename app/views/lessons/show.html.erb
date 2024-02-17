@@ -19,4 +19,9 @@
       <%= link_to "Mark as complete", course_lesson_path(@course, @lesson), data: { 'turbo-method' => :put }, class:'bg-green-500 rounded hover:bg-green-600 text-white-50 px-4 py-2' %>
     </div>
   </div>
+
+  <%# Sidebar %>
+  <div>
+      <%= render 'sidebar', course: @course %>
+  </div>
 </div>
