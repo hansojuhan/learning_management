@@ -11,19 +11,14 @@
           </span>
         </div>
       </div>
-
     <% else %>
-
       <%= link_to course_lesson_path(course, lesson) do %>
-
         <%# Put some ruby right inside the class to highlight the current lesson %>
         <div
           class="border p-6 hover:bg-gray-200 <%= @lesson.id == lesson.id ? 'bg-amaranth-100' : '' %>">
           <span class="font-light"><%= lesson.title %></span>
         </div>
       <% end %>
-
     <% end %>
-    <span>
-  <% end %>
-</div>
+    <% end %>
+  </div>
