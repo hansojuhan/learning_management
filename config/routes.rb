@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
-  resources :lessons
   devise_for :admins, skip: [:registrations]
   devise_for :users
-  resources :courses
+  
+  # resources :lessons <- All lessons have context of what course they are in.
+  # That's why we want this to be nested.
+  resources :courses do
+    # This is to add course_lesson_path
+    # For example: http://localhost:3000/courses/1/lessons/1
+    # This messes up something else "edit_lesson_path"
+    resources :lessons
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Where devise routes admins to after login
@@ -19,4 +26,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "courses#index"
+
 end

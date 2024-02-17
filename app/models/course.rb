@@ -8,4 +8,10 @@ class Course < ApplicationRecord
   has_many :lessons
   # creates a direct many-to-many connection with another model
   has_and_belongs_to_many :categories
+
+  # Give the first lesson. This also needs positions to be added to Lesson.
+  # We need this to determine which lesson comes first.
+  def first_lesson
+    self.lessons.order(:position).first
+  end
 end
