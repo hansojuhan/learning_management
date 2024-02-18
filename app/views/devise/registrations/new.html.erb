@@ -36,7 +36,13 @@
                 clip-rule="evenodd" />
         </svg>
     
-        <%= f.password_field :email, class:'outline-none border-none pl-2 border-transparent focus:border-transparent focus:ring-0', placeholder:'Confirm Password', autocomplete:'password' %>
+        <%= f.password_field :password_confirmation, class:'outline-none border-none pl-2 border-transparent focus:border-transparent focus:ring-0', placeholder:'Confirm Password', autocomplete:'password' %>
+      </div>
+
+      <%= f.submit "Sign up", class:'block w-full bg-amaranth-600 hover:bg-amaranth-700 mt-4 py-2 rounded-2xl text-white-50 cursor-pointer font-semibold mb-2' %>
+
+      <div class="mt-6">
+        <%= render "devise/shared/links" %>
       </div>
     <% end %>
   </div>
