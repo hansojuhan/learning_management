@@ -29,6 +29,14 @@
         <%= f.password_field :password, class:'outline-none border-none pl-2 border-transparent focus:border-transparent focus:ring-0', placeholder:'Password', autocomplete:'password' %>
       </div>
 
+      <%# Remember me box %>
+      <% if devise_mapping.rememberable? %>
+        <div class="mt-4 ml-2">
+          <%= f.check_box :remember_me, class:'rounded' %>
+          <%= f.label :remember_me, class:'text-gray-400 text-sm font-bold' %>
+      <% end %>
+
+
       <%= f.submit "Sign in", class:'block w-full bg-amaranth-600 hover:bg-amaranth-700 mt-4 py-2 rounded-2xl text-white-50 cursor-pointer font-semibold mb-2' %>
 
       <div class="mt-6">
