@@ -16,6 +16,10 @@
         <%# Put some ruby right inside the class to highlight the current lesson %>
         <div
           class="border p-6 hover:bg-gray-200 <%= @lesson.id == lesson.id ? 'bg-amaranth-100' : '' %>">
+
+          <%# If completed lessons includes the current lesson, then show the completed icon %>
+          <%= completed_lessons.include?(lesson.id) ? icon('fa-solid', 'check-circle', class:'mr-2 text-green-50') : nil %>
+
           <span class="font-light"><%= lesson.title %></span>
         </div>
       <% end %>
