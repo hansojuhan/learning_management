@@ -14,4 +14,27 @@ class Course < ApplicationRecord
   def first_lesson
     self.lessons.order(:position).first
   end
+
+  def next_lesson(current_user)
+    # I have current lesson
+    # It has position
+    # Next has position + 1
+    if current_user.blank?
+      return first_lesson
+    end
+
+    completed_lessons = current_user.lesson_users.includes(:lesson).where(completed: true).where(lessons: {course_id: self.id })
+    started_lessons = current_user.lesson_users.includes(:lesson).where(completed: false).where(lesson: { course_id: self.id }).order(:position)
+
+    if started_lessons.any?
+      return started_lessons
+    end
+
+    lessons = self.lessons.where.not(id: completed_lessons.pluck(:lesson_id)).order(:position)
+    if lessons.any?
+      lessons.first
+    else
+      return first_lesson
+    end
+  end
 end

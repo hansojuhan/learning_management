@@ -8,6 +8,9 @@ class CoursesController < ApplicationController
 
   # GET /courses/1 or /courses/1.json
   def show
+    # Determine if the user has started the course or not
+    # The &. operator is known as the safe navigation operator in Ruby. It is used to call a method on an object only if the object is not nil
+    @completed_lessons = current_user&.lesson_users&.joins(:lesson)&.where(completed: true, lesson: { course: @course })&.pluck(:lesson_id)
   end
 
   # GET /courses/new
