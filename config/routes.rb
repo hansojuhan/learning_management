@@ -27,4 +27,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "courses#index"
 
+  # Create checkout route
+  resources :checkouts, only: [:create]
 end
