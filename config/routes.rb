@@ -29,4 +29,7 @@ Rails.application.routes.draw do
 
   # Create checkout route
   resources :checkouts, only: [:create]
+
+  # Stripe webhook
+  post "/webhook" => "webhooks#stripe"
 end

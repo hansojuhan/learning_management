@@ -6,4 +6,5 @@ class User < ApplicationRecord
          :confirmable # This way, an email will be sent out to the user
 
   has_many :lesson_users
+  has_many :course_users
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_19_155118) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_22_184220) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -66,6 +66,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_19_155118) do
     t.index ["course_id"], name: "index_categories_courses_on_course_id"
   end
 
+  create_table "course_users", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_users_on_course_id"
+    t.index ["user_id"], name: "index_course_users_on_user_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -115,6 +124,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_19_155118) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "course_users", "courses"
+  add_foreign_key "course_users", "users"
   add_foreign_key "lesson_users", "lessons"
   add_foreign_key "lesson_users", "users"
   add_foreign_key "lessons", "courses"
