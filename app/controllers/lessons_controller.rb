@@ -11,7 +11,9 @@ class LessonsController < ApplicationController
     @completed_lessons = current_user.lesson_users.where(completed:true).pluck(:lesson_id)
     @course = @lesson.course
 
-
+    # Check if a course-user record exists for this user with this course
+    # If yes, they have paid for it
+    @paid_for_course = current_user.course_users.where(course: @course).exists?
   end
   
   # PATCH/PUT /lessons/1 or /lessons/1.json
