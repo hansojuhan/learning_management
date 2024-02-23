@@ -2,6 +2,9 @@ class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[ show update ]
   before_action :set_course
 
+  # Check if course is paid for first
+  before_action :check_paid
+
   # This is the USER FACING controller, so they should not have power to edit, create, destroy 
   # This is user facing, so we do not want users to be able to destroy, update, create
   # All that will happen in a separate admin controller
@@ -43,5 +46,19 @@ class LessonsController < ApplicationController
 
     def set_course
       @course = Course.find(params[:course_id])
+    end
+
+    def check_paid
+      # If lesson is paid and current user has not paid for it
+      if @lesson.paid && !current_user.course_users.where(course_id: params[:course_id]).exists?
+
+        # Redirect to the same page, if the previous lesson exists
+        if @lesson.previous_lesson
+          redirect_to course_lesson_path(@course, @lesson.previous_lesson), notice: "You must purchase the full course to access the next lesson"
+        else
+          redirect_to course_path(@course), notice: "You must purchase the full course to access the lesson"
+        end
+
+      end
     end
 end
