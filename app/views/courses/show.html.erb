@@ -3,10 +3,12 @@
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
+
     <%# Video %>
     <% if @course.lessons.any? && @course.lessons.first.video.present? %>
       <%= video_tag @course.lessons.first.video, controls: true, class:'w-full rounded mb-6' %>
     <% end %>
+    
     <%# Description box with tech, heading, description %>
     <div class="border p-6 rounded">
       <div class="flex justify-start items-center flex-wrap w-full mb-2">
