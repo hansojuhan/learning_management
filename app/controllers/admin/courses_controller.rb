@@ -12,4 +12,18 @@ class Admin::CoursesController < AdminController
     @admin_course = Course.new
   end
   
+  def create
+    @admin_course = Course.new(course_params)
+
+    if @admin_course.save
+      redirect_to admin_courses_path
+    else
+      render :new
+    end
+  end
+
+  private
+    def course_params
+      params.require(:course).permit(:title, :description, :premium_description, :paid, :stripe_price_id, :image)
+    end
 end
