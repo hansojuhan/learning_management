@@ -1,4 +1,5 @@
-<%= form_with(model: admin_course) do |form| %>
+<%# Needs to hit the admin course %>
+<%= form_with(model: [:admin, admin_course]) do |form| %>
   <% if admin_course.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(admin_course.errors.count, "error") %> prohibited this admin_course from being saved:</h2>
@@ -11,7 +12,50 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.submit %>
+  <%# Form content, first title %>
+  <div class="flex flex-col">
+    <label class="text-sm" for="name">Title</label>
+    <%= form.text_field :title, class:'rounded border-gray-200', id:'title', placeholder:'Course title' %>
+  </div>
+
+  <%# Rich text %>
+  <%# Part of Rails, but not included by default %>
+  <%# To include, run bin/rails action_text:install %>
+  <%# Also migrate db to add tables that are needed to store rich text %>
+  <%# Also, models need to be told they have rich text (Course) %>
+  <%# has_rich_text :field %>
+  <div class="flex flex-col mt-4">
+    <label class="text-sm" for="name">Description</label>
+
+    <%= form.rich_text_area :description, class:'rounded border-gray-200', id:'description', placeholder:'Course description' %>  
+  </div>
+
+  <%# Stripe price %>
+  <div class="flex flex-col mt-4">
+    <label class="text-sm" for="name">Stripe Price ID</label>
+    <%= form.text_field :stripe_price_id, class:'rounded border-gray-200', id:'stripe_price_id' %>
+  </div>
+
+  <%# Image %>
+  <div class="flex flex-col mt-4">
+    <%= admin_course.image.present? ? (image_tag admin_course.image, class:'w-64 rounded mb-2') : nil %>
+
+    <label class="text-sm" for="name">Cover Image</label>
+    <%= form.file_field :image, id: "image" %>
+  </div>
+
+  <div class="flex flex-col mt-4">
+    <label class="text-sm" for="name">Paid</label>
+    <%= form.check_box :paid, class:'rounded border-gray-200', id:'paid' %>
+  </div>
+
+  <div class="flex flex-col mt-4">
+    <label class="text-sm" for="name">Premium Description</label>
+
+    <%= form.rich_text_area :premium_description, class:'rounded border-gray-200', id:'description', placeholder:'Premium description' %>  
+  </div>
+
+  <div class="mt-4">
+    <%= form.submit "Submit", class:'bg-amaranth-500 hover:bg-amaranth-600 text-white-50 rounded cursor-pointer px-4 py-2' %>
   </div>
 <% end %>
