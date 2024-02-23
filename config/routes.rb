@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   # Admin namespace
   namespace :admin do
     # Here everything is prefixed with admin module
-    resources :courses
+    resources :courses do
+      resources :lessons
+    end
   end
 end
