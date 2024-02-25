@@ -40,4 +40,6 @@ Rails.application.routes.draw do
       resources :lessons
     end
   end
+
+  patch "/admin/course/:course_id/lessons/:id/move" => "admin/lessons#move"
 end

@@ -4,7 +4,7 @@
     <% if lesson.video.present? %>
       <%# Grabbing thumbnail off the video, check lesson model %>
       <%= image_tag lesson.video.preview(:thumb), class:'w-full rounded-t' %>
-    <% else %>
+    <% else %>  
       <%= image_tag("https://via.placeholder.com/320") %>
     <% end %>
 
