@@ -73,3 +73,6 @@ gem 'font-awesome-sass', '~> 6.5', '>= 6.5.1'
 
 gem 'devise', '~> 4.9', '>= 4.9.3'
 gem 'stripe', '~> 10.9'
+
+# For drag and drop
+gem 'acts_as_list', '~> 1.1'

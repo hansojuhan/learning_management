@@ -11,6 +11,10 @@ class Course < ApplicationRecord
 
   has_many :course_users
 
+  # For rich text
+  has_rich_text :description
+  has_rich_text :premium_description
+
   # Give the first lesson. This also needs positions to be added to Lesson.
   # We need this to determine which lesson comes first.
   def first_lesson

@@ -32,4 +32,14 @@ Rails.application.routes.draw do
 
   # Stripe webhook
   post "/webhook" => "webhooks#stripe"
+
+  # Admin namespace
+  namespace :admin do
+    # Here everything is prefixed with admin module
+    resources :courses do
+      resources :lessons
+    end
+  end
+
+  patch "/admin/course/:course_id/lessons/:id/move" => "admin/lessons#move"
 end
