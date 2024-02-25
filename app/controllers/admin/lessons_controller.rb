@@ -1,7 +1,7 @@
 class Admin::LessonsController < AdminController
   before_action :set_course
   # Define the lesson for drag n drop
-  before_action :set_lesson, only: [:move, :show]
+  before_action :set_lesson, only: [:move, :show, :edit, :update, :destroy]
 
   def index
     @admin_lessons = @admin_course.lessons.order(:position)
@@ -35,6 +35,23 @@ class Admin::LessonsController < AdminController
     @admin_lesson = @admin_course.lessons.new
   end
  
+  def update
+    if @admin_lesson.update(lesson_params)
+      flash[:success] = "Object was successfully updated"
+      redirect_to admin_course_lessons_path(@admin_course)
+    else
+      flash[:error] = "Something went wrong"
+      render :edit
+    end
+  end
+  
+  def destroy
+    @admin_lesson.destroy!
+
+    redirect_to admin_course_lessons_path(@admin_course)
+  end
+  
+
   def create
     @admin_lesson = @admin_course.lessons.new(lesson_params)
     if @admin_lesson.save
@@ -46,6 +63,8 @@ class Admin::LessonsController < AdminController
     end
   end
   
+  def edit
+  end
 
   private
     def lesson_params
