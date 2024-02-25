@@ -1,12 +1,15 @@
 class Admin::LessonsController < AdminController
   before_action :set_course
   # Define the lesson for drag n drop
-  before_action :set_lesson, only: [:move]
+  before_action :set_lesson, only: [:move, :show]
 
   def index
     @admin_lessons = @admin_course.lessons.order(:position)
   end
 
+  def show
+    # Lesson already provided by before action
+  end
   
   # This Ruby on Rails controller action, move, is designed to change the order of 
   # lessons within a course, utilizing the acts_as_list gem. The acts_as_list gem 
