@@ -1,1 +1,99 @@
-<h1>Admin Index </h1>
+<div class="w-full flex flex-col justify-start items-center">
+  <h1 class="font-bold text-4xl mb-4 md:mb-10 text-start w-full">Admin Dashboard</h1>
+
+  <%# Quick stats %>
+  <div class="flex flex-row gap-10 justify-center md:flex-col items-center md:justify-between w-full">
+
+    <div class="max-w-sm rounded overflow-hidden w-full md:w-48 shadow-xl bg-gradient-to-r from-amaranth-400 to-amaranth-300">
+      <div class="px-6 py-4">
+        <h2 class="font-bold text-xl mb-2 text-amaranth-50">Sign Ups</h2>      
+        <p class="text-amaranth-50 text-base">
+          <%= @quick_stats[:sign_ups] %>
+        </p>
+      </div>
+    </div>
+
+    <div class="max-w-sm rounded overflow-hidden w-full md:w-48 shadow-xl bg-gradient-to-r from-amaranth-400 to-amaranth-300">
+      <div class="px-6 py-4">
+        <h2 class="font-bold text-xl mb-2 text-amaranth-50">Sales</h2>      
+        <p class="text-amaranth-50 text-base">
+          <%= @quick_stats[:sales] %>
+        </p>
+      </div>
+    </div>
+    
+    <div class="max-w-sm rounded overflow-hidden w-full md:w-48 shadow-xl bg-gradient-to-r from-amaranth-400 to-amaranth-300">
+      <div class="px-6 py-4">
+        <h2 class="font-bold text-xl mb-2 text-amaranth-50">Completed Lessons</h2>      
+        <p class="text-amaranth-50 text-base">
+          <%= @quick_stats[:completed_lessons] %>
+        </p>
+      </div>
+    </div>
+
+    <div class="max-w-sm rounded overflow-hidden w-full md:w-48 shadow-xl bg-gradient-to-r from-amaranth-400 to-amaranth-300">
+      <div class="px-6 py-4">
+        <h2 class="font-bold text-xl mb-2 text-amaranth-50">Total Sign Ups</h2>      
+        <p class="text-amaranth-50 text-base">
+          <%= @quick_stats[:total_sign_ups] %>
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <%# Dashboard with a stimulus controller %>
+  <div class="w-full flex flex-col justify-between items-cetner md:flex-row mt-8" data_controller="dashboard" data-dashboard-signups-value=<%= @sign_ups_by_day %> data_dashboard_completed_value=<% @completed_lessons_by_day.to_json %>>
+
+    <div class="w-full md:w-1/2">
+    
+      <h2 class="font-bold text-2xl my-8 text-center">Completed Lessons</h2>
+      <canvas id="chart"></canvas>
+    
+    </div>
+  </div>
+
+  <%# Chart 2 %>
+  <div class="w-full flex flex-col justify-between items-cetner md:flex-row mt-8" data_controller="dashboard" data-dashboard-signups-value=<%= @sign_ups_by_day %> data_dashboard_completed_value=<% @completed_lessons_by_day.to_json %>>
+
+    <div class="w-full md:w-1/2">
+    
+      <h2 class="font-bold text-2xl my-8 text-center">Sign Ups</h2>
+      <canvas id="sign_ups_chart"></canvas>
+    
+    </div>
+  </div>
+
+  <%# After this, run 'bin/rails g stimulus dashboard' %>
+  <%# And install chart js by using 'bin/importmap pin chart.js' %>
+
+
+  <%# To fix this dynmically load isue %>
+  <%# Set importmap rails to 1.2.3 %>
+  <%# Set stimulus-rails to 1.3.0 %>
+  <%# "bin/importmap unpin chart.js", then repin it %>
+
+  <div class="w-full overflow-x-auto my-6">
+  
+    <h2 class="font-bold text-2xl my-8">Most Popular Courses</h2>
+    <table class="min-w-full bg-amaranth-50" style="border-collapse: separate; border-spacing: 0;">
+    
+      <thead>
+        <tr class="text-amaranth-800">
+          <th class="px-6 py-3 border-b-2 border-l-amaranth-200 text-start bg-amaranth-100">Title</th>
+          <th class="px-6 py-3 border-b-2 border-l-amaranth-200 text-start bg-amaranth-100">Users</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-800">
+        <% @most_popular_courses.each do |course| %>
+          <tr>
+            <td class="px-6 py-4 border-gray-200"><%= course.title %></td>          
+            <td class="px-6 py-4 border-gray-200"><%= course.course_users.count %></td>          
+          </tr>
+        <% end %>
+      </tbody>    
+    
+    </table>
+
+  </div>
+</div>
