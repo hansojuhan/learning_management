@@ -1,0 +1,34 @@
+<div class="w-full flex flex-col justify-start items-center">
+  <p style="color: green"><%= notice %></p>
+
+  <div class="w-full overflow-x-auto">
+    <table class="min-w-full bg-amaranth-50" style="border-collapse: separate; border-spacing: 0;">
+    
+      <thead>
+        <tr class="text-amaranth-800">
+          <th class="px-6 py-3 border-b-2 border-l-amaranth-200 text-start bg-amaranth-100"></th>
+          <th class="px-6 py-3 border-b-2 border-l-amaranth-200 text-start bg-amaranth-100">Email</th>
+          <th class="px-6 py-3 border-b-2 border-l-amaranth-200 text-start bg-amaranth-100">Created At</th>
+          <th class="px-6 py-3 border-b-2 border-l-amaranth-200 text-start bg-amaranth-100">Updated At</th>
+          <th class="px-6 py-3 border-b-2 border-l-amaranth-200 text-start bg-amaranth-100">Delete User</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-800">
+        <% @admin_users.each do |user| %>
+          <tr>
+            <td class="px-6 py-4 border-gray-200 border-b"><%= link_to user.id, admin_user_path(user), class:'underline' %></td>          
+            <td class="px-6 py-4 border-gray-200 border-b"><%= user.email %></td>          
+            <td class="px-6 py-4 border-gray-200 border-b"><%= user.created_at.to_formatted_s(:long) %></td>          
+            <td class="px-6 py-4 border-gray-200 border-b"><%= user.updated_at.to_formatted_s(:long) %></td>          
+            <td class="px-6 py-4 border-gray-200 border-b">
+              <%= button_to icon('fa-solid', 'trash-can'), [:admin, @user], method: :delete, data: { 'turbo-confirm': "Are you sure?" }, class:'text-red-600' %>
+            </td>          
+          </tr>
+        <% end %>
+      </tbody>    
+    
+    </table>
+  
+  
+  </div>
+</div>
